@@ -14,7 +14,7 @@ public class ListDeduplicatorTest {
     @BeforeEach
     private void generateLists() {
         list = Arrays.asList(1, 2, 4, 2, 5);
-        expected = Arrays.asList(1, 2, 4);
+        expected = Arrays.asList(1, 2, 4, 5);
     }
 
     @Test
@@ -26,8 +26,8 @@ public class ListDeduplicatorTest {
         }
         StubListSorter sorter = new StubListSorter();
         ListDeduplicator deduplicator = new ListDeduplicator(sorter);
-        List<Integer> distinct = deduplicator.deduplicate(list);
-        Assertions.assertEquals(expected, distinct);
+        List<Integer> deduplicated = deduplicator.deduplicate(list);
+        Assertions.assertEquals(expected, deduplicated);
     }
 
     @Test
@@ -40,7 +40,8 @@ public class ListDeduplicatorTest {
         }
         StubListSorter sorter = new StubListSorter();
         ListDeduplicator deduplicator = new ListDeduplicator(sorter);
-        List<Integer> distinct = deduplicator.deduplicate(list);
-        Assertions.assertEquals(expected, distinct);
+        List<Integer> deduplicated = deduplicator.deduplicate(list);
+        List<Integer> exp = Arrays.asList(1, 2, 4);
+        Assertions.assertEquals(exp, deduplicated);
     }
 }
