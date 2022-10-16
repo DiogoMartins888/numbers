@@ -17,11 +17,14 @@ public class ListSorter implements GenericListSorter {
         for (Integer number : list)
             sorted.add(number);
 
-        for (int i = 0; i < sorted.size() - 1; i++)
-            for (int j = i + 1; j < sorted.size() - 1; j++)
-                if (sorted.get(i) > sorted.get(j))
-                    Collections.swap(sorted, i, j);
-
+        // Insertion Sort
+        for (int i = 1; i < sorted.size(); i++) {
+            Integer tmp = sorted.get(i);
+            int j;
+            for (j = i; j > 0 && tmp < sorted.get(j - 1); j--)
+                sorted.set(j, sorted.get(j - 1));
+            sorted.set(j, tmp);
+        }
         return sorted;
     }
 }
