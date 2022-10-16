@@ -13,7 +13,7 @@ public class ListAggregatorTest {
 
     @BeforeEach
     private void generateTestList() {
-        list = Arrays.asList(1, 2, 4, 2);
+        list = Arrays.asList(-1, 4, 3, -2, 6, 5, 2, 2, -1, 0);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class ListAggregatorTest {
         ListAggregator aggregator = new ListAggregator();
         int sum = aggregator.sum(list);
 
-        Assertions.assertEquals(9, sum);
+        Assertions.assertEquals(18, sum);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class ListAggregatorTest {
         ListAggregator aggregator = new ListAggregator();
         int max = aggregator.max(list);
 
-        Assertions.assertEquals(4, max);
+        Assertions.assertEquals(6, max);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ListAggregatorTest {
         ListAggregator aggregator = new ListAggregator();
         int min = aggregator.min(list);
 
-        Assertions.assertEquals(1, min);
+        Assertions.assertEquals(-2, min);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ListAggregatorTest {
         class StubListDeduplicator implements GenericListDeduplicator {
             @Override
             public List<Integer> deduplicate(List<Integer> list) {
-                return Arrays.asList(1, 2, 4, 5);
+                return Arrays.asList(-2, -1, 0, 2, 3, 4, 5, 6);
             }
         }
 
@@ -65,7 +65,7 @@ public class ListAggregatorTest {
         StubListDeduplicator deduplicator = new StubListDeduplicator();
         int distinct = aggregator.distinct(list, deduplicator);
 
-        Assertions.assertEquals(4, distinct);
+        Assertions.assertEquals(8, distinct);
     }
 
     @Test
